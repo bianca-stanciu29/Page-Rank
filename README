@@ -1,0 +1,44 @@
+STANCIU BIANCA-ANDREEA, GRUPA 315CC
+
+	In realizarea acestei teme m-am bazat atat pe algoritmi folositi in cadrul laboratoarelor de MN, cat si pe resursele
+web puse la dispozitie.
+	Cerinta 1: Algoritmul Iterative
+-atat in acest algoritm, cat si in restul am folosit aceeasi "tehnica" de citire a datelor din fisier: am construit
+o matrice cu datele respective si am extras de fiecare data ce aveam nevoie din ea: fie numarul de resurse web N, fie
+listele de vecini.
+-pentru listele de vecini am construit o matrice cu N linii, iar in privinta numarului de coloane, acesta va fi egal cu
+numarul maxim de vecini din nodurile respective.
+-pentru a construi matricea de adiacenta, am parcurs matricea B de noduri si am verificat daca elementul este diferit de
+ zero si diferit de el insusi(adica sa nu revina in el), iar in aceasta pozitie, in matricea A voi pune 1. Pentru a
+ determina cati vecini are fiecare nod si pentru a retine acest lucru am creat un vector v, parcurgand matricea B pe
+ linii si innumarand cate el diferite de zero si de i sunt pe linia i. Astfel, cu ajutorul matricei A si vectorului v
+ am realizat matricea L, unde fiecare element de pe linia i din A va fi impartit la v[i].
+-am initializat fiecare element din R cu 1/N si m-am folosit de prev_R initializat cu zero pentru a retine de fiecare
+data vechea valoare a lui R.Pentru a calcula noua valoare a lui R, am aplicat formula data in resursa web pusa la
+dispozitie : R = d*(L*R) + (1-d)/N. Deoarece calculul probabilitatii se face pt fiecare pagina la un moment dat, acesta
+se va opri cand norma va fi mai mica decat epsilon(eroarea data ca data de intrare).
+	Cerinta 2:Algoritmul Algebraic
+-am preluat de la algoritmul anterior: citirea, construitrea matricei B, construire matricei de adiacenta A, a
+vectorului v si a matricei L.
+-am creat matricea unitate de dimensiuni NxN, iar in matricea D am salvat valoarea diferemtei: I-d*L. Am construit
+matricea coloana de 1, ONE, pe care am folosit-o pentru a forma matricea R. Folosind algoritmul lui Gram-Schmidt
+preluat din cadrul cursului, am calculat inversa lui D, urmand ca mai apoi sa o folosesc pentru a calcula R conform
+formulei: R = M * ((1-d)/N)*ONE.
+Folosind algoritmul Gram-Schmidt optimizat mi se modifica ordinea in output-ul 1 si in loc de 4 3 5 2 1 7 6 imi afiseaza
+ 4 3 5 2 1 6 7.
+	Cerinta 3:Gradul de Apartenenta
+1.Algoritmul Apartenenta
+-in aceasta functie am construit pe cazuri functia membru data la inceput in enuntul temei. Stiind ca u(x) este o
+functie continua, atunci calculand limitele la stanga si la dreapta in val1, respectiv val2 si egaland rezultatele
+obtinute am aflat coeficientii a si b. Apoi, testand de fiecare data in care ramura a functiei se incadreaza variabila
+se va atribui rezultatul corespunzator.
+2.Algoritmul PageRank
+-la fel ca la cerintele anterioare, am citit toate datele in matricea M si am extras N-ul si val1, respectiv val2.
+Pentru a crea fisierele de output, am concatenat .out la numele fisierului de input si i-am dat permisiuni de scriere.
+Pentru a calcula R1, respectiv R2 am apelat functiile Iterative, respectiv Algebraic, afisandu-le pe rand in fisierul
+de output. Inainte de a apela functia de Apartenenta am salvat valoarea lui R2 in R. Am creat initial un vector de
+indici care sa retina pozitia initiala a fiecarui element din R. Folosind algoritmul de sortare prin interschimbare,
+am sortat descrescator matricea R si vectorul de indici va retine vechea pozitie a elementului in noua pozitie.
+Parcurgand fiecare element din R si apeland functia Apartenenta, voi afisa in output pozitia initiala a elementului,
+vechea lui pozitie in functie de pozitia cea noua si rezultatul final al noului R construit in functie de functia membru
+construita la inceput.
